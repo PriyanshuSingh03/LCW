@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    /* Basic CSS styling */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .timer {
+      width: 300px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    .timer input[type="number"] {
+      width: 50px;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .timer button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="timer">
+    <input type="number" id="hours" min="0" placeholder="Hours">
+    <input type="number" id="minutes" min="0" max="59" placeholder="Minutes">
+    <input type="number" id="seconds" min="0" max="59" placeholder="Seconds">
+    <br>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="resetTimer()">Reset</button>
+  </div>
+
+  <script>
+    let timer;
+    let hoursInput = document.getElementById('hours');
+    let minutesInput = document.getElementById('minutes');
+    let secondsInput = document.getElementById('seconds');
+
+    function startTimer() {
+      const hours = parseInt(hoursInput.value) || 0;
+      const minutes = parseInt(minutesInput.value) || 0;
+      const seconds = parseInt(secondsInput.value) || 0;
+
+      let totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+      if (totalSeconds <= 0) {
+        alert('Please enter a valid time.');
+        return;
+      }
+
+      timer = setInterval(() => {
+        totalSeconds--;
+
+        if (totalSeconds <= 0) {
+          clearInterval(timer);
+          alert('Timer expired!');
+        }
+
+        displayTime(totalSeconds);
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      hoursInput.value = '';
+      minutesInput.value = '';
+      secondsInput.value = '';
+    }
+
+    function displayTime(totalSeconds) {
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      hoursInput.value = hours.toString().padStart(2, '0');
+      minutesInput.value = minutes.toString().padStart(2, '0');
+      secondsInput.value = seconds.toString().padStart(2, '0');
+    }
+  </script>
+</body>
+</html>
+
+
