@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    /* Basic CSS styling */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .form {
+      width: 300px;
+      margin: 50px auto;
+    }
+    .form input[type="text"],
+    .form input[type="password"] {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .form button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .error-message {
+      color: red;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form">
+    <h2>Login</h2>
+    <div id="error-message" class="error-message"></div>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMessage = document.getElementById('error-message');
+
+      // Reset error message
+      errorMessage.textContent = '';
+
+      // Check for empty fields
+      if (!username || !password) {
+        errorMessage.textContent = 'Username and password are required.';
+        return;
+      }
+
+      // In a real-world scenario, you would hash the password before sending it to the server
+      // For this example, let's just alert the username and password (you would replace this with your backend logic)
+      alert(`Username: ${username}, Password: ${password}`);
+    }
+  </script>
+</body>
+</html>
+
